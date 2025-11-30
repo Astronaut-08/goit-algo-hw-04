@@ -56,24 +56,55 @@ def insertion_sort(lst):
     return lst
 ###############################################
 
+num_test_short = 100000
+num_test_long = 1000
+
+print('-'*20, 'Короткі масиви', '-'*20)
+mrg = timeit.timeit(
+    stmt='merge_sort([random.randrange(100) for _ in range(10)])',
+    setup='from __main__ import merge_sort, random',
+    number=num_test_short
+
+)
+
+insrt = timeit.timeit(
+    stmt='insertion_sort([random.randrange(100) for _ in range(10)])',
+    setup='from __main__ import insertion_sort, random',
+    number=num_test_short
+
+)
+
+timsort = timeit.timeit(
+    stmt='sorted([random.randrange(100) for _ in range(10)])',
+    setup='from __main__ import random',
+    number=num_test_short
+
+)
+
+print(f'Час виконання сортування злиттям: {mrg:.3f} секунд.')
+print(f'Час виконання сортування вставками: {insrt:.3f} секунд.')
+print(f'Час виконання сортування timsort: {timsort:.3f} секунд.')
+
+
+print('\n','-'*20, 'Довгі масиви', '-'*20)
 mrg = timeit.timeit(
     stmt='merge_sort([random.randrange(100) for _ in range(1000)])',
     setup='from __main__ import merge_sort, random',
-    number=1000
+    number=num_test_long
 
 )
 
 insrt = timeit.timeit(
     stmt='insertion_sort([random.randrange(100) for _ in range(1000)])',
     setup='from __main__ import insertion_sort, random',
-    number=1000
+    number=num_test_long
 
 )
 
 timsort = timeit.timeit(
     stmt='sorted([random.randrange(100) for _ in range(1000)])',
     setup='from __main__ import random',
-    number=1000
+    number=num_test_long
 
 )
 
